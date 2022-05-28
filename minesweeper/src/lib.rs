@@ -7,7 +7,7 @@ use wasm_bindgen::prelude::*;
 
 thread_local! {
   static MINESWEEPER: RefCell<Minesweeper>
-    = RefCell::new(Minesweeper::new(10, 10, 15));
+    = RefCell::new(Minesweeper::new(10, 10, 10));
 }
 
 #[wasm_bindgen(js_name = getState)]
@@ -27,4 +27,9 @@ pub fn toggle_flag(x: usize, y: usize) {
   MINESWEEPER.with(|ms| {
     ms.borrow_mut().toggle_flag((x, y));
   });
+}
+
+#[wasm_bindgen(js_name = hasLost)]
+pub fn has_lost() -> bool {
+  MINESWEEPER.with(|ms| ms.borrow().has_lost())
 }

@@ -96,6 +96,10 @@ impl Minesweeper {
       .count() as u8
   }
 
+  pub fn has_lost(&self) -> bool {
+    return self.lost as bool;
+  }
+
   pub fn open(&mut self, pos: Position) -> Option<OpenResult> {
     if self.open_fields.contains(&pos) {
       let mine_count = self.neighboring_mines(pos);
@@ -166,6 +170,7 @@ mod tests {
     ms.open((5, 5));
     ms.toggle_flag((6, 6));
     ms.open((6, 6));
+    println!("{}", ms.has_lost());
 
     println!("{}", ms);
   }
